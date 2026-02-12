@@ -1,19 +1,12 @@
 ﻿
-# ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓ 
-# ┃  █████╗ ██████╗  ██████╗ ██████╗ ██╗███████╗┃ 
-# ┃ ██╔══██╗██╔══██╗██╔═══██╗██╔══██╗██║██╔════╝┃ 
-# ┃ ███████║██████╔╝██║   ██║██████╔╝██║█████╗  ┃ 
-# ┃ ██╔══██║██╔═══╝ ██║   ██║██╔══██╗██║██╔══╝  ┃ 
-# ┃ ██║  ██║██║     ╚██████╔╝██║  ██║██║███████╗┃ 
-# ┃ ╚═╝  ╚═╝╚═╝      ╚═════╝ ╚═╝  ╚═╝╚═╝╚══════╝┃ 
-# ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ SHELL ━━━━━━━━┛ 
+# OfficeR - Office Deployment Tool GUI
 # Credits: https://github.com/gravesoft
 
 
 # ════ Konfiguration ═══════════════════════════════════════════════════════════
 # Programmname und Version
 $name       = "OfficeR "
-$version    = "1.1"
+$version    = "1.2.0"
 
 # Einstellungen
 $RunAsAdmin = $false
@@ -208,7 +201,7 @@ $Keys = @{
 # ▓▓ Funktionen  ▓
 # ══════════════════════════════════════════════════════════════════════════════
 # Shell Funktionen
-function display-Shell {
+function Show-Shell {
     param(
         [switch]$Hide,
         [switch]$Show
@@ -778,7 +771,7 @@ function installOfficeOffline {
 # ▓▓ Initialisierung ▓
 # ══════════════════════════════════════════════════════════════════════════════
 if ($RunAsAdmin -and -not $isAdmin) { restart-Script -Admin $true }
-if ($hideShell) { display-Shell -Hide }
+if ($hideShell) { Show-Shell -Hide }
 # Invoke-RestMethod "https://aporie.me/scripts/windows.form.ps1" | Invoke-Expression
 . .\windows.form.ps1
 
@@ -964,10 +957,10 @@ $HideShellLabel = createLabel -Width 200 -Height 20 -Left 195 -Hand -Visible (-n
 $footerPanel.Controls.AddRange(@( $aporieLabel, $showShellLabel, $HideShellLabel ))
 
 Add-Events -Control $showShellLabel -Events @{
-    "Click"      = { display-Shell -Show; $showShellLabel.Visible = $false; $HideShellLabel.Visible = $true }
+    "Click"      = { Show-Shell -Show; $showShellLabel.Visible = $false; $HideShellLabel.Visible = $true }
 }
 Add-Events -Control $hideShellLabel -Events @{
-    "Click"      = { display-Shell -Hide; $showShellLabel.Visible = $true; $HideShellLabel.Visible = $false }
+    "Click"      = { Show-Shell -Hide; $showShellLabel.Visible = $true; $HideShellLabel.Visible = $false }
 }
 # ════ Form ════════════════════════════════════════════════════════════════════
 $form   = createForm -Width 410 -Height (330 + $formHeight) -Text "$name - APORIE Skript" 
