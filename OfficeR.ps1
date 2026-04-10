@@ -2,6 +2,8 @@
 # OfficeR - Office Deployment Tool GUI
 # Credits: https://github.com/gravesoft
 
+$env:PSModulePath += ";$PSScriptRoot\Modules"
+Import-Module FormBuilder
 
 # ════ Konfiguration ═══════════════════════════════════════════════════════════
 # Programmname und Version
